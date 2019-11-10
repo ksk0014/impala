@@ -657,6 +657,9 @@ public class HdfsTable extends Table implements FeFsTable {
     if (FileSystemUtil.isADLFileSystem(fs)) return TAccessLevel.READ_WRITE;
     if (FileSystemUtil.isABFSFileSystem(fs)) return TAccessLevel.READ_WRITE;
 
+    // Avoid calling getPermissions() on file path for DFS files
+    if (FileSystemUtil.isDFSFileSystem(fs)) return TAccessLevel.READ_WRITE;
+
     while (location != null) {
       try {
         FsPermissionChecker.Permissions perms = permCache.getPermissions(location);

@@ -149,7 +149,8 @@ public class LoadDataStmt extends StatementBase {
       if (!(fs instanceof DistributedFileSystem) && !(fs instanceof S3AFileSystem) &&
           !(fs instanceof AzureBlobFileSystem) &&
           !(fs instanceof SecureAzureBlobFileSystem) &&
-          !(fs instanceof AdlFileSystem)) {
+          !(fs instanceof AdlFileSystem) &&
+          !(fs instanceof com.alibaba.dfs.DistributedFileSystem)) {
         throw new AnalysisException(String.format("INPATH location '%s' " +
             "must point to an HDFS, S3A, ADL or ABFS filesystem.", sourceDataPath_));
       }
@@ -164,7 +165,9 @@ public class LoadDataStmt extends StatementBase {
       FsPermissionChecker checker = FsPermissionChecker.getInstance();
       // TODO: Disable permission checking for S3A as well (HADOOP-13892)
       boolean shouldCheckPerms = !(fs instanceof AdlFileSystem ||
-        fs instanceof AzureBlobFileSystem || fs instanceof SecureAzureBlobFileSystem);
+        fs instanceof AzureBlobFileSystem ||
+        fs instanceof SecureAzureBlobFileSystem ||
+        fs instanceof com.alibaba.dfs.DistributedFileSystem);
 
       if (fs.isDirectory(source)) {
         if (FileSystemUtil.getTotalNumVisibleFiles(source) == 0) {

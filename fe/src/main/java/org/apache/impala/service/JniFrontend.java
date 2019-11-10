@@ -777,7 +777,8 @@ public class JniFrontend {
             fs instanceof S3AFileSystem ||
             fs instanceof AzureBlobFileSystem ||
             fs instanceof SecureAzureBlobFileSystem ||
-            fs instanceof AdlFileSystem)) {
+            fs instanceof AdlFileSystem ||
+            fs instanceof com.alibaba.dfs.DistributedFileSystem)) {
         return "Currently configured default filesystem: " +
             fs.getClass().getSimpleName() + ". " +
             CommonConfigurationKeysPublic.FS_DEFAULT_NAME_KEY +

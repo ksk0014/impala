@@ -137,6 +137,12 @@ under the License.
     </dependency>
 
     <dependency>
+      <groupId>com.aliyun.dfs</groupId>
+      <artifactId>aliyun-sdk-dfs</artifactId>
+      <version>1.0.3</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.apache.ranger</groupId>
       <artifactId>ranger-plugins-common</artifactId>
       <version>${ranger.version}</version>
